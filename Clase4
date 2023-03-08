@@ -1,0 +1,126 @@
+
+package clase4;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Clase4 {	
+
+	    public static void main(String[] args) {
+      
+      
+      //ACTIVIDAD 1 A
+	    	        if(args.length != 4) {
+	    	            System.out.println("Debes colocar tres números  y elegir la letra S o D, para indicar el orden, S para ascendente y D para descendente.");
+	    	            return;
+	    	        }
+
+	    	        int[] numeros = new int[3];
+	    	        for(int i = 0; i < 3; i++) {
+	    	            numeros[i] = Integer.parseInt(args[i]);
+	    	        }
+
+	    	        char orden = args[3].charAt(0);
+	    	        if(orden == 'S') {
+					Arrays.sort(numeros);
+	    	        } else if(orden == 'D') {
+	    	            Arrays.sort(numeros);
+	    	            for(int i = 0; i < numeros.length / 2; i++) {
+	    	                int temp = numeros[i];
+	    	                numeros[i] = numeros[numeros.length - i - 1];
+	    	                numeros[numeros.length - i - 1] = temp;
+	    	            }
+	    	        } else {
+	    	            System.out.println("La letra debe ser S o D.");
+	    	            return;
+	    	        }
+
+	    	        System.out.println("Los números en el orden indicado son:");
+	    	        for(int i = 0; i < numeros.length; i++) {
+	    	            System.out.println(numeros[i]);
+	    	        }
+	    	    }
+	    	}
+        
+//ACTIVIDAD 1 B
+
+package clase4;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Clase4 {	
+
+	    public static void main(String[] args) {
+	    	Scanner sc = new Scanner(System.in);
+	        int[] numeros = new int[3];
+
+	        for(int i = 0; i < 3; i++) {
+	            System.out.print("Ingrese el número " + (i+1) + ": ");
+	            numeros[i] = sc.nextInt();
+	        }
+
+	        System.out.print("Ingrese la letra de orden para el criterio (S para ascendente o D para descendente): ");
+	        char orden1 = sc.next().charAt(0);
+	        if(orden1 == 'D') {
+	            Arrays.sort(numeros);
+	            for(int i = 0; i < numeros.length / 2; i++) {
+	                int temp = numeros[i];
+	                numeros[i] = numeros[numeros.length - i - 1];
+	                numeros[numeros.length - i - 1] = temp;
+	            }
+	        } else if(orden1 != 'S') {
+	            System.out.println("La letra de orden debe ser S o D.");
+	            return;
+	        }
+
+	      
+
+	        System.out.println("Los números ordenados son:");
+	        for(int i = 0; i < numeros.length; i++) {
+	            System.out.println(numeros[i]);
+	        }
+	    }
+	}
+  
+  //ACTIVIDAD 1 C
+  
+  package clase4;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Clase4 {	
+
+	    public static void main(String[] args) {
+	    	Scanner sc = new Scanner(System.in);
+	        int[] numeros = new int[3];
+
+	        for(int i = 0; i < 3; i++) {
+	            System.out.print("Ingrese el número " + (i+1) + ": ");
+	            numeros[i] = sc.nextInt();
+	        }
+
+	        System.out.print("Ingrese la letra de orden para el primer criterio (S para ascendente o D para descendente): ");
+	        char orden1 = sc.next().charAt(0);
+	        if(orden1 == 'D') {
+	            Arrays.sort(numeros);
+	            for(int i = 0; i < numeros.length / 2; i++) {
+	                int temp = numeros[i];
+	                numeros[i] = numeros[numeros.length - i - 1];
+	                numeros[numeros.length - i - 1] = temp;
+	            }
+	        } else if(orden1 != 'S') {
+	            System.out.println("La letra de orden debe ser S o D.");
+	            return;
+	        }
+
+	      
+
+	        System.out.println("Los números ordenados son:");
+	        for(int i = 0; i < numeros.length; i++) {
+	            System.out.println(numeros[i]);
+	        }
+	    }
+	    public static char obtenerOrden(Scanner sc, String posicion) {
+	        System.out.print("Ingrese la letra de orden para el " + posicion + " criterio (S para ascendente o D para descendente): ");
+	        return sc.next().charAt(0);
+	    }
+	}
