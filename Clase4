@@ -1,3 +1,6 @@
+//ACTIVIDAD CLASE 4 PUNTO 1 A
+
+
 
 package clase4;
 import java.util.Arrays;
@@ -8,7 +11,7 @@ public class Clase4 {
 	    public static void main(String[] args) {
       
       
-      //ACTIVIDAD 1 A
+  
 	    	        if(args.length != 4) {
 	    	            System.out.println("Debes colocar tres números  y elegir la letra S o D, para indicar el orden, S para ascendente y D para descendente.");
 	    	            return;
@@ -41,7 +44,10 @@ public class Clase4 {
 	    	    }
 	    	}
         
-//ACTIVIDAD 1 B
+	
+	
+	
+//ACTIVIDAD CLASE 4 PUNTO 1 B
 
 package clase4;
 import java.util.Arrays;
@@ -81,7 +87,11 @@ public class Clase4 {
 	    }
 	}
   
-  //ACTIVIDAD 1 C
+  
+  
+  
+  
+  //ACTIVIDAD CLASE 4 PUNTO 1 C
   
   package clase4;
 import java.util.Arrays;
@@ -122,5 +132,96 @@ public class Clase4 {
 	    public static char obtenerOrden(Scanner sc, String posicion) {
 	        System.out.print("Ingrese la letra de orden para el " + posicion + " criterio (S para ascendente o D para descendente): ");
 	        return sc.next().charAt(0);
+	    }
+	}
+	
+	
+	
+	
+	
+//ACTIVIDAD CLASE 4 PUNTO 2
+
+package clase4;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+
+public class Clase4 {	
+	
+	    public static void main(String[] args) {
+	        if (args.length == 0) {
+	            System.out.println("Debe ingresar la ruta del archivo para continuar.");
+	            return;
+	        }
+	        
+	        String rutaArchivo = args[0];
+	        int suma = 0;
+	        
+	        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
+	            String linea;
+	            while ((linea = br.readLine()) != null) {
+	                int numero = Integer.parseInt(linea);
+	                suma += numero;
+	            }
+	            System.out.println("La suma de los números es: " + suma);
+	        } catch (IOException e) {
+	            System.out.println("Error al leer el archivo: " + e.getMessage());
+	        } catch (NumberFormatException e) {
+	            System.out.println("El archivo contiene datos no numéricos: " + e.getMessage());
+	        }
+	    }
+	}
+	
+	
+	
+	
+	// ACTIVIDAD CLASE 4 PUNTO 2 PARTE A
+	
+	
+package clase4;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class Clase4 {	
+	
+
+
+
+
+	    public static void main(String[] args) {
+	        if (args.length < 2) {
+	            System.out.println("Debe ingresar la ruta del archivo y la operación ( elegir entre suma o multiplicacion) como parámetros.");
+	            return;
+	        }
+	        
+	        String rutaArchivo = args[0];
+	        String operacion = args[1];
+	        int resultado = 0;
+	        
+	        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
+	            String linea;
+	            while ((linea = br.readLine()) != null) {
+	                int numero = Integer.parseInt(linea);
+	                if (operacion.equals("suma")) {
+	                    resultado += numero;
+	                } else if (operacion.equals("multiplicacion")) {
+	                    if (resultado == 0) {
+	                        resultado = numero;
+	                    } else {
+	                        resultado *= numero;
+	                    }
+	                } else {
+	                    System.out.println("Operación inválida. Debe elegir: suma o multiplicacion.");
+	                    return;
+	                }
+	            }
+	            System.out.println("El resultado de la operación " + operacion + " es: " + resultado);
+	        } catch (IOException e) {
+	            System.out.println("Error al leer el archivo: " + e.getMessage());
+	        } catch (NumberFormatException e) {
+	            System.out.println("El archivo contiene datos no numéricos: " + e.getMessage());
+	        }
 	    }
 	}
