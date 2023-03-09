@@ -225,3 +225,48 @@ public class Clase4 {
 	        }
 	    }
 	}
+	
+	//ACTIVIDAD CLASE 4 PUNTO 3
+	
+	package clase4;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Clase4 {	
+
+	    public static void main(String[] args) {
+	        try (Scanner scanner = new Scanner(System.in)) {
+	            // El usuario debe ingresar una lista de nombres separados por coma
+	            System.out.print("Ingrese una lista de nombres separados por coma: ");
+	            String listaNombres = scanner.nextLine();
+
+	            // metodo split para separar los nombres de la lista
+	            String[] nombres = listaNombres.split(",");
+
+	            // Se muestran los nombres en la consola
+	            System.out.println("Los nombres ingresados son:");
+	            for (String nombre : nombres) {
+	                System.out.println(nombre.trim()); // trim() para eliminar espacios
+	            }
+	            
+	            // Se le pide al usuario que ingrese la ruta del archivo donde luego se guardará la lista de nombres ingresada previamente
+	            System.out.print("Ingrese la ruta del archivo donde desea guardar la lista de nombres: ");
+	            String rutaArchivo = scanner.nextLine();
+
+	            // Se escribe la lista de nombres en el archivo
+	            try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivo))) {
+	                for (String nombre : nombres) {
+	                    writer.write(nombre.trim());
+	                    writer.newLine(); // se agrega una línea después de cada nombre ingresado
+	                }
+	                System.out.println("La lista de nombres ingresada se ha guardado en el archivo " + rutaArchivo);
+	            } catch (IOException e) {
+	                System.out.println("Hubo un error al escribir en el archivo: " + e.getMessage());
+	            }
+	        }
+	    }
+	}
+
