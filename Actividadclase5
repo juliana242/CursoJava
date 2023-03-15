@@ -99,3 +99,83 @@ public class primerpunto {
 		        return Math.min(carrito.getPrecioTotal(), montoDescuento);
 		    }
 		}
+		
+		//ACTIVIDAD CLASE 5 PARTE 2
+		
+		package punto1;
+
+                public class primerpunto {
+
+	  public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+import java.util.ArrayList;		
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        Carrito carrito = new Carrito();
+        String archivo = "productos.txt";
+        String separador = "\t"; 
+
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] valores = linea.split(separador);
+                int cantidad = Integer.parseInt(valores[0].trim());
+                double precioUnitario = Double.parseDouble(valores[1].trim());
+                String producto = valores[2].trim();
+                Item item = new Item(cantidad, precioUnitario, producto);
+                carrito.agregarItem(item);
+            }
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo: " + e.getMessage());
+        }
+
+        System.out.println("Precio total: " + carrito.precio());
+    }
+}
+
+class Item {
+    private int cantidad;
+    private double precioUnitario;
+    private String producto;
+
+    public Item(int cantidad, double precioUnitario, String producto) {
+        this.cantidad = cantidad;
+        this.precioUnitario = precioUnitario;
+        this.producto = producto;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public double getPrecioUnitario() {
+        return precioUnitario;
+    }
+
+    public String getProducto() {
+        return producto;
+    }
+}
+
+class Carrito {
+    private List<Item> items = new ArrayList<>();
+
+    public void agregarItem(Item item) {
+        items.add(item);
+    }
+
+    public double precio() {
+        double total = 0;
+        for (Item item : items) {
+            total += item.getCantidad() * item.getPrecioUnitario();
+        }
+        return total;
+    }
+}
+
