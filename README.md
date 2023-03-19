@@ -1,2 +1,0 @@
-# CursoJava
-Curso Desarrollador Java
