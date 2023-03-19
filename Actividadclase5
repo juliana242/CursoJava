@@ -70,11 +70,11 @@ public class primerpunto {
 		        return total;
 		    }
 		}
-//creacion de clase abstracta llamada "Descuento"
+//creacion de clase llamada "Descuento" (Abstracta)
 		public abstract class Descuento {
 		    public abstract double calcularDescuento(Carrito carrito);
 		}
-//creacion de clase llamada "DescuentoPorcentaje"
+//creacion de clase llamada "DescuentoPorcentaje" (subclase 1)
 		public class DescuentoPorcentaje extends Descuento {
 		    private double porcentajeDescuento;
 
@@ -86,25 +86,25 @@ public class primerpunto {
 		        return carrito.getPrecioTotal() * porcentajeDescuento / 100.0;
 		    }
 		}
-//creacion de clase llamada "DescuentoMontoFijo"
-		public class DescuentoMontoFijo extends Descuento {
-		    private double montoDescuento;
+//creacion de clase llamada "DescuentoMontoFijo" (subclase 2)
+	public class DescuentoMontoFijo extends Descuento {
+    private double montoDescuento;
 
-		    public DescuentoMontoFijo(double montoDescuento) {
-		        this.montoDescuento = montoDescuento;
-		    }
+    public DescuentoMontoFijo(double montoDescuento) {
+        this.montoDescuento = montoDescuento;
+    }
 
-		    @Override
-		    public double calcularDescuento(Carrito carrito) {
-		        return Math.min(carrito.getPrecioTotal(), montoDescuento);
-		    }
-		}
+    public double calcularDescuento(Carrito carrito) {
+        return Math.min(carrito.getPrecioTotal(), montoDescuento);
+    }
+}
+
 		
 		//ACTIVIDAD CLASE 5 PARTE 2
 		
 		package punto1;
 
-                public class primerpunto {
+                public class segundopunto {
 
 	  public static void main(String[] args) {
 		// TODO Auto-generated method stub
