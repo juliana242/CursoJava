@@ -1,3 +1,18 @@
+//1.	Utilizando solo tipos iteraciones simples y siguientes métodos:
+ 
+primitivos, String (solo usar método length), vectores, condicionales, genere una clase por ejercicio que posea los
+ 
+a.	Dado un String y una letra, que cuente la cantidad de apariciones de la letra en el String
+b.	Dados 3 números y un orden (ascendente o decreciente) que ordene los mismos y los retorne en un vector de 3
+c.	dado un vector de números, y un número X, que sume todos los números > X y retorne el resultado
+2.	Genere una clase, utilice el método Split para separar una lista de 10 nombres tomados de una variable, luego muestre por consola el resultado.
+
+
+
+
+
+
+
 package clase3;
 
 public class Clase3 {
