@@ -1,0 +1,161 @@
+//CLASE 7 ACTIVIDAD 1
+
+package punto1;
+
+public class primerpunto {
+
+import java.util.ArrayList;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        Carrito carrito = new Carrito();
+        String archivo = "productos.txt";
+        String separador = "\t"; 
+        double descuento = 0.1; // Ejemplo de descuento del 10%
+        
+//se agrega la variable descuento para almacenar el valor del mismo
+
+        if (args.length > 0) {
+            if (args[0].equalsIgnoreCase("fijo") && args.length > 1) {
+                descuento = Double.parseDouble(args[1]);
+            } else if (args[0].equalsIgnoreCase("porcentaje") && args.length > 1) {
+                descuento = Double.parseDouble(args[1]) / 100.0;
+            }
+        }
+//se verifica si el usuario proporciono algun comando para dilucidar si el descuento se aplica a valor fijo o porcentaje
+
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] valores = linea.split(separador);
+                int cantidad = Integer.parseInt(valores[0].trim());
+                double precioUnitario = Double.parseDouble(valores[1].trim());
+                String producto = valores[2].trim();
+                Item item = new Item(cantidad, precioUnitario, producto);
+                carrito.agregarItem(item);
+            }
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo: " + e.getMessage());
+        }
+//Si corresponde el valor fijo del descuento, se le asigna ese valor a la variable.
+en caso de que sea aplicable el descuento por porcentaje, se divide ese valor por 
+100 y se asigna a la variable descuento.
+
+// Primero se calcula el precio total del carrito sin el descuento, luego se calcula el precio con descuento restando el descuento del precio total 
+y por ultimo se imprime en la consola
+
+
+        double precioSinDescuento = carrito.precio();
+        double precioConDescuento = precioSinDescuento - (precioSinDescuento * descuento);
+        System.out.println("Precio sin descuento: " + precioSinDescuento);
+        System.out.println("Descuento aplicado: " + descuento * 100.0 + "%");
+        System.out.println("Precio con descuento: " + precioConDescuento);
+    }
+}
+
+class Item {
+    private int cantidad;
+    private double precioUnitario;
+    private String producto;
+
+    public Item(int cantidad, double precioUnitario, String producto) {
+        this.cantidad = cantidad;
+        this.precioUnitario = precioUnitario;
+        this.producto = producto;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public double getPrecioUnitario() {
+        return precioUnitario;
+    }
+
+    public String getProducto() {
+        return producto;
+    }
+}
+
+class Carrito {
+    private List<Item> items = new ArrayList<>();
+
+    public void agregarItem(Item item) {
+        items.add(item);
+    }
+
+    public double precio() {
+        double total = 0;
+        for (Item item : items) {
+            total += item.getCantidad() * item.getPrecioUnitario();
+        }
+        return total;
+    }
+}
+
+
+//CLASE 7 ACTIVIDAD 2
+
+package punto2;
+
+public class segundopunto {
+
+
+//Se lee una lista de productos desde el archivo de texto "productos.txt" y calcula el precio total de la compra sin descuento.
+
+
+    public static void main(String[] args) {
+        Carrito carrito = new Carrito();
+        String archivo = "productos.txt";
+        String separador = "\t"; 
+
+        // Se aplica el descuento con tope fijo del 15% con un tope de $50.
+        DescuentoPorcentajeConTope descuento = new DescuentoPorcentajeConTope(0.15, 50.0);
+
+        if (args.length > 0) {
+            if (args[0].equalsIgnoreCase("fijo") && args.length > 1) {
+                descuento = new DescuentoFijo(Double.parseDouble(args[1]));
+            } else if (args[0].equalsIgnoreCase("porcentaje") && args.length > 1) {
+                descuento = new DescuentoPorcentaje(Double.parseDouble(args[1]) / 100.0);
+            }
+        }
+
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] valores = linea.split(separador);
+                int cantidad = Integer.parseInt(valores[0].trim());
+                double precioUnitario = Double.parseDouble(valores[1].trim());
+                String producto = valores[2].trim();
+                Item item = new Item(cantidad, precioUnitario, producto);
+                carrito.agregarItem(item);
+            }
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo: " + e.getMessage());
+        }
+
+        double precioSinDescuento = carrito.precio();
+        double descuentoAplicado = descuento.calcularDescuento(precioSinDescuento);
+        double precioConDescuento = precioSinDescuento - descuentoAplicado;
+        System.out.println("Precio sin descuento: " + precioSinDescuento);
+        System.out.println("Descuento aplicado: " + descuentoAplicado);
+        System.out.println("Precio con descuento: " + precioConDescuento);
+    }
+}
+// precio final
+class Item {
+    private int cantidad;
+    private double precioUnitario;
+    private String producto;
+}
+    public Item(int cantidad, double precioUnitario, String producto) {
+        this.cantidad = cantidad;
+        this.precioUnitario = precioUnitario;
+        this.producto = producto;
+    }
+}
+  
