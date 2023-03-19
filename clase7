@@ -1,11 +1,3 @@
-Herencia
-1. Al programa del carrito de la Clase 5, agregue un parámetro que indique si hay un
-descuento fijo o % y ponga el valor del mismo.
-2. Agregue un nuevo descuento %, pero que tenga un tope Fijo en una nueva clase
-DescuentoPorcentajeConTope
-
-
-
 //CLASE 7 ACTIVIDAD 1
 
 package punto1;
