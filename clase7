@@ -1,24 +1,21 @@
 //CLASE 7 ACTIVIDAD 1
 
-package punto1;
+package cursojava;
 
-public class primerpunto {
-
-import java.util.ArrayList;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.BufferedReader;
-import java.util.List;
+import java.io.File;
 
-public class Main {
+public class ejercicio1 {
     public static void main(String[] args) {
         Carrito carrito = new Carrito();
-        String archivo = "productos.txt";
+        File archivo = new File("C:\\Users\\julia\\Downloads\\productos.txt");
         String separador = "\t"; 
         double descuento = 0.1; // Ejemplo de descuento del 10%
         
-//se agrega la variable descuento para almacenar el valor del mismo
-
+        //se agrega la variable descuento para almacenar el valor del mismo
+        //se verifica si el usuario proporciono algun comando para dilucidar si el descuento se aplica a valor fijo o porcentaje
         if (args.length > 0) {
             if (args[0].equalsIgnoreCase("fijo") && args.length > 1) {
                 descuento = Double.parseDouble(args[1]);
@@ -26,7 +23,6 @@ public class Main {
                 descuento = Double.parseDouble(args[1]) / 100.0;
             }
         }
-//se verifica si el usuario proporciono algun comando para dilucidar si el descuento se aplica a valor fijo o porcentaje
 
         try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
             String linea;
@@ -41,14 +37,9 @@ public class Main {
         } catch (IOException e) {
             System.err.println("Error al leer el archivo: " + e.getMessage());
         }
-//Si corresponde el valor fijo del descuento, se le asigna ese valor a la variable.
-en caso de que sea aplicable el descuento por porcentaje, se divide ese valor por 
-100 y se asigna a la variable descuento.
 
-// Primero se calcula el precio total del carrito sin el descuento, luego se calcula el precio con descuento restando el descuento del precio total 
-y por ultimo se imprime en la consola
-
-
+        //Si corresponde el valor fijo del descuento, se le asigna ese valor a la variable.en caso de que sea aplicable el descuento por porcentaje, se divide ese valor por  100 y se asigna a la variable descuento.
+        // Primero se calcula el precio total del carrito sin el descuento, luego se calcula el precio con descuento restando el descuento del precio total  y por ultimo se imprime en la consola
         double precioSinDescuento = carrito.precio();
         double precioConDescuento = precioSinDescuento - (precioSinDescuento * descuento);
         System.out.println("Precio sin descuento: " + precioSinDescuento);
@@ -58,44 +49,10 @@ y por ultimo se imprime en la consola
 }
 
 class Item {
-    private int cantidad;
-    private double precioUnitario;
-    private String producto;
-
     public Item(int cantidad, double precioUnitario, String producto) {
-        this.cantidad = cantidad;
-        this.precioUnitario = precioUnitario;
-        this.producto = producto;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public double getPrecioUnitario() {
-        return precioUnitario;
-    }
-
-    public String getProducto() {
-        return producto;
     }
 }
 
-class Carrito {
-    private List<Item> items = new ArrayList<>();
-
-    public void agregarItem(Item item) {
-        items.add(item);
-    }
-
-    public double precio() {
-        double total = 0;
-        for (Item item : items) {
-            total += item.getCantidad() * item.getPrecioUnitario();
-        }
-        return total;
-    }
-}
 
 
 //CLASE 7 ACTIVIDAD 2
