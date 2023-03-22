@@ -5,19 +5,18 @@ package cursojava;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.BufferedReader;
-import java.io.File;
 
 public class ejercicio1 {
     public static void main(String[] args) {
         Carrito carrito = new Carrito();
-        File archivo = new File("C:\\Users\\julia\\Downloads\\productos.txt");
+        String archivo = "C:\\Users\\juliana\\Downloads\\productos.txt";
         String separador = "\t"; 
-        double descuento = 0.1; // Ejemplo de descuento del 10%
+        double descuento = 0.0; // Descuento por defecto es cero
         
         //se agrega la variable descuento para almacenar el valor del mismo
         //se verifica si el usuario proporciono algun comando para dilucidar si el descuento se aplica a valor fijo o porcentaje
         if (args.length > 0) {
-            if (args[0].equalsIgnoreCase("fijo") && args.length > 1) {
+            if (args[0].equalsIgnoreCase("fijo") && args.length >
                 descuento = Double.parseDouble(args[1]);
             } else if (args[0].equalsIgnoreCase("porcentaje") && args.length > 1) {
                 descuento = Double.parseDouble(args[1]) / 100.0;
@@ -81,7 +80,7 @@ public class segundopunto {
             }
         }
 
-        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+         try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] valores = linea.split(separador);
@@ -91,7 +90,7 @@ public class segundopunto {
                 Item item = new Item(cantidad, precioUnitario, producto);
                 carrito.agregarItem(item);
             }
-        } catch (IOException e) {
+       } catch (IOException e) {
             System.err.println("Error al leer el archivo: " + e.getMessage());
         }
 
@@ -103,12 +102,12 @@ public class segundopunto {
         System.out.println("Precio con descuento: " + precioConDescuento);
     }
 }
-// precio final
+
 class Item {
     private int cantidad;
     private double precioUnitario;
     private String producto;
-}
+
     public Item(int cantidad, double precioUnitario, String producto) {
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
