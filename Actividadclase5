@@ -2,98 +2,102 @@
 
 package punto1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class primerpunto {
 
-	public static void main(String[] args) {
+    // Clase "Producto"
+public static class Producto {
+    private String nombre;
+    private double precio;
 
-//creacion de clase llamada "Producto"
-		public class Producto {
-		    private String nombre;
-		    private double precio;
+    public Producto(String nombre, double precio) {
+        this.nombre = nombre;
+        this.precio = precio;
+    }
 
-		    public Producto(String nombre, double precio) {
-		        this.nombre = nombre;
-		        this.precio = precio;
-		    }
+    public String getNombre() {
+        return nombre;
+    }
 
-		    public String getNombre() {
-		        return nombre;
-		    }
-		}
-	    }
+    public double getPrecio() {
+        return precio;
+    }
+}
 
-	private double precio;
+// Clase "ItemCarrito"
+public static class ItemCarrito {
+    private Producto producto;
+    private int cantidad;
 
-		    public double getPrecio() {
-		        return precio;
-		    }
-		}
-//creacion de clase llamada "ItemCarrito"
-		public class ItemCarrito {
-		    private Producto producto;
-		    private int cantidad;
+    public ItemCarrito(Producto producto, int cantidad) {
+        this.producto = producto;
+        this.cantidad = cantidad;
+    }
 
-		    public ItemCarrito(Producto producto, int cantidad) {
-		        this.producto = producto;
-		        this.cantidad = cantidad;
-		    }
+    public Producto getProducto() {
+        return producto;
+    }
 
-		    public Producto getProducto() {
-		        return producto;
-		    }
+    public int getCantidad() {
+        return cantidad;
+    }
 
-		    public int getCantidad() {
-		        return cantidad;
-		    }
+    public double getPrecioTotal() {
+        return producto.getPrecio() * cantidad;
+    }
+}
 
-		    public double getPrecioTotal() {
-		        return producto.getPrecio() * cantidad;
-		    }
-		}
-//creacion de clase llamada "Carrito"
-		public class Carrito {
-		    private List<ItemCarrito> items = new ArrayList<>();
+// Clase "Carrito"
+public static class Carrito {
+    private List<ItemCarrito> items = new ArrayList<>();
 
-		    public void agregarItem(ItemCarrito item) {
-		        items.add(item);
-		    }
+    public void agregarItem(ItemCarrito item) {
+        items.add(item);
+    }
 
-		    public List<ItemCarrito> getItems() {
-		        return items;
-		    }
+    public List<ItemCarrito> getItems() {
+        return items;
+    }
 
-		    public double getPrecioTotal() {
-		        double total = 0.0;
-		        for (ItemCarrito item : items) {
-		            total += item.getPrecioTotal();
-		        }
-		        return total;
-		    }
-		}
-//creacion de clase llamada "Descuento" (Abstracta)
-		public abstract class Descuento {
-		    public abstract double calcularDescuento(Carrito carrito);
-		}
-//creacion de clase llamada "DescuentoPorcentaje" (subclase 1)
-		public class DescuentoPorcentaje extends Descuento {
-		    private double porcentajeDescuento;
+    public double getPrecioTotal() {
+        double total = 0.0;
+        for (ItemCarrito item : items) {
+            total += item.getPrecioTotal();
+        }
+        return total;
+    }
+}
 
-		    public DescuentoPorcentaje(double porcentajeDescuento) {
-		        this.porcentajeDescuento = porcentajeDescuento;
-		    }
-		    @Override
-		    public double calcularDescuento(Carrito carrito) {
-		        return carrito.getPrecioTotal() * porcentajeDescuento / 100.0;
-		    }
-		}
-//creacion de clase llamada "DescuentoMontoFijo" (subclase 2)
-	public class DescuentoMontoFijo extends Descuento {
+// Clase abstracta "Descuento"
+public abstract class Descuento {
+    public abstract double calcularDescuento(Carrito carrito);
+}
+
+// Clase "DescuentoPorcentaje" (subclase 1)
+public class DescuentoPorcentaje extends Descuento {
+    private double porcentajeDescuento;
+
+    public DescuentoPorcentaje(double porcentajeDescuento) {
+        this.porcentajeDescuento = porcentajeDescuento;
+    }
+
+    @Override
+    public double calcularDescuento(Carrito carrito) {
+        return carrito.getPrecioTotal() * porcentajeDescuento / 100.0;
+    }
+}
+
+// Clase "DescuentoMontoFijo" (subclase 2)
+public class DescuentoMontoFijo extends Descuento {
     private double montoDescuento;
 
     public DescuentoMontoFijo(double montoDescuento) {
         this.montoDescuento = montoDescuento;
     }
 
+    @Override
     public double calcularDescuento(Carrito carrito) {
         return Math.min(carrito.getPrecioTotal(), montoDescuento);
     }
@@ -102,24 +106,19 @@ public class primerpunto {
 		
 		//ACTIVIDAD CLASE 5 PARTE 2
 		
-		package punto1;
+package punto2;
 
-                public class segundopunto {
-
-	  public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-import java.util.ArrayList;		
+import java.util.ArrayList;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.util.List;
 
-public class Main {
+public class SegundoPunto {
     public static void main(String[] args) {
         Carrito carrito = new Carrito();
         String archivo = "productos.txt";
-        String separador = "\t"; 
+        String separador = "\t";
 
         try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
             String linea;
@@ -135,7 +134,7 @@ public class Main {
             System.err.println("Error al leer el archivo: " + e.getMessage());
         }
 
-        System.out.println("Precio total: " + carrito.precio());
+        System.out.println("Precio total: " + carrito.getPrecioTotal());
     }
 }
 
@@ -170,7 +169,7 @@ class Carrito {
         items.add(item);
     }
 
-    public double precio() {
+    public double getPrecioTotal() {
         double total = 0;
         for (Item item : items) {
             total += item.getCantidad() * item.getPrecioUnitario();
@@ -178,4 +177,5 @@ class Carrito {
         return total;
     }
 }
+
 
